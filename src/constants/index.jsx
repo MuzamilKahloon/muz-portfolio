@@ -92,7 +92,7 @@ import {
     {
       icon: <FaReact className="text-4xl text-cyan-400 lg:text-5xl" />,
       name: "React",
-      experience: "7+ months",
+      experience: "10+ months",
     },
     {
       icon: <FaHtml5 className="text-4xl text-orange-500 lg:text-5xl" />,
@@ -112,12 +112,12 @@ import {
     {
       icon: <SiTailwindcss className="text-4xl text-cyan-400 lg:text-5xl" />,
       name: "Tailwind CSS",
-      experience: "7+ months",
+      experience: "10+ months",
     },
     {
       icon: <SiFramer className="text-4xl text-purple-500 lg:text-5xl" />,
       name: "Framer Motion",
-      experience: "7+ months",
+      experience: "10+ months",
     },
   ];
   
