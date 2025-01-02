@@ -1,34 +1,68 @@
 import logo from "../../public/assets/logom.jpg";
 import { SOCIAL_MEDIA_LINKS } from "../constants";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
+};
 
 const Footer = () => {
   return (
-    <div className="mt-20 mb-8">
+    <motion.div
+      className="mt-20 mb-8"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {/* Logo Section */}
-      <div className="flex items-center justify-center">
+      <motion.div
+        className="flex items-center justify-center"
+        variants={itemVariants}
+      >
         <img src={logo} width={200} className="my-20" alt="Logo" />
-      </div>
+      </motion.div>
 
       {/* Social Media Links */}
-      <div className="flex items-center justify-center gap-8">
+      <motion.div
+        className="flex items-center justify-center gap-8"
+        variants={containerVariants}
+      >
         {SOCIAL_MEDIA_LINKS.map((link, index) => (
-          <a
+          <motion.a
             key={index}
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-500 hover:text-gray-900"
+            variants={itemVariants}
           >
             {link.icon}
-          </a>
+          </motion.a>
         ))}
-      </div>
+      </motion.div>
 
       {/* Footer Text */}
-      <p className="mt-8 text-sm tracking-wide text-center text-gray-400">
-        &copy; {new Date().getFullYear()} Muzammil Ashfaq Kahloon. All rights reserved.
-      </p>
-    </div>
+      <motion.p
+        className="mt-8 text-sm tracking-wide text-center text-gray-400"
+        variants={itemVariants}
+      >
+        &copy; {new Date().getFullYear()} Muzammil Ashfaq Kahloon. All rights
+        reserved.
+      </motion.p>
+    </motion.div>
   );
 };
 

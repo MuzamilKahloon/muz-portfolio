@@ -1,7 +1,25 @@
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify"; // Correct import
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
+};
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -53,12 +71,12 @@ const ContactForm = () => {
 
       emailjs
         .send(
-          "service_54fuagp", // Replace with your EmailJS service ID
-          "template_jgpi8ao", // Replace with your EmailJS template ID
+          "service_54fuagp",
+          "template_jgpi8ao",
           formData,
-          "TIduvt50NHcV6USQf" // Replace with your EmailJS public key
+          "TIduvt50NHcV6USQf"
         )
-        .then((response) => {
+        .then(() => {
           toast.success("Message sent successfully");
           setFormData({ name: "", email: "", message: "" });
           setIsSending(false);
@@ -72,13 +90,22 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="p-4 mx-auto lg:w-3/4" id="contact">
-      <ToastContainer /> {/* Use ToastContainer here */}
-      <h2 className="my-8 text-4xl font-semibold tracking-tighter text-center">
+    <motion.div
+      className="p-4 mx-auto lg:w-3/4"
+      id="contact"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <ToastContainer />
+      <motion.h2
+        className="my-8 text-4xl font-semibold tracking-tighter text-center"
+        variants={itemVariants}
+      >
         Let's Connect
-      </h2>
-      <form onSubmit={handleSubmit}>
-        <div className="flex mb-4 space-x-4">
+      </motion.h2>
+      <motion.form onSubmit={handleSubmit} variants={containerVariants}>
+        <motion.div className="flex mb-4 space-x-4" variants={itemVariants}>
           <div className="lg:w-1/2">
             <input
               type="text"
@@ -107,8 +134,8 @@ const ContactForm = () => {
               <p className="text-sm text-rose-800">{errors.email}</p>
             )}
           </div>
-        </div>
-        <div>
+        </motion.div>
+        <motion.div variants={itemVariants}>
           <textarea
             id="message"
             name="message"
@@ -121,8 +148,11 @@ const ContactForm = () => {
           {errors.message && (
             <p className="text-sm text-rose-800">{errors.message}</p>
           )}
-        </div>
-        <div className="flex justify-center">
+        </motion.div>
+        <motion.div
+          className="flex justify-center"
+          variants={itemVariants}
+        >
           <button
             type="submit"
             disabled={isSending}
@@ -130,9 +160,9 @@ const ContactForm = () => {
           >
             {isSending ? "Sending..." : "Send"}
           </button>
-        </div>
-      </form>
-    </div>
+        </motion.div>
+      </motion.form>
+    </motion.div>
   );
 };
 
